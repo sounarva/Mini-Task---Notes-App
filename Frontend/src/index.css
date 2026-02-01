@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import 'remixicon/fonts/remixicon.css';
+
+@font-face {
+    font-family: helvetica;
+    src: url('../public/Fonts/HelveticaNeueRoman.otf');
+}
+
+* {
+    font-family: helvetica;
+}
+
+.note{
+    background: linear-gradient(to top , black , rgb(49, 48, 48));
+}
