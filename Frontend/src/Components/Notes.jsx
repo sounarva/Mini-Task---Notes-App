@@ -7,7 +7,7 @@ import { Slide, toast } from 'react-toastify'
 const Notes = () => {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [note, setNote] = useState({})
-    const { notes } = useContext(NotesContext)
+    const { notes, setNotes } = useContext(NotesContext)
     const URI = import.meta.env.VITE_BACKEND_URL
 
 
@@ -29,6 +29,7 @@ const Notes = () => {
             transition: Slide,
         });
         await axios.delete(`${URI}/notes/${id}`)
+        setNotes(prevNotes => prevNotes.filter(note => note._id !== id))
     }
 
     return (

@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Bounce, toast } from 'react-toastify'
+import { NotesContext } from '../Context/NotesContext'
+import { useContext } from 'react'
 
 const CreateNoteModal = ({ setModalOpen }) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const { setNotes } = useContext(NotesContext)
     const URI = import.meta.env.VITE_BACKEND_URL
 
     async function createNote() {
-        await axios.post(`${URI}/notes`, {
+        const response = await axios.post(`${URI}/notes`, {
             title,
             description
         })
+        setNotes((prevNotes) => [...prevNotes, response.data.note])
         toast.success('Note Created Successfully', {
             position: "top-right",
             autoClose: 2000,

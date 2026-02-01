@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { Slide, toast } from 'react-toastify'
+import { NotesContext } from '../Context/NotesContext'
 
 const EditNoteModal = ({ setEditModalOpen, note }) => {
     const [title, setTitle] = useState(note.title)
     const [description, setDescription] = useState(note.description)
     const URI = import.meta.env.VITE_BACKEND_URL
-
+    const { setNotes } = useContext(NotesContext)
     async function updateNote() {
         toast.info('Note Updated Successfully', {
             position: "bottom-right",
@@ -19,10 +20,11 @@ const EditNoteModal = ({ setEditModalOpen, note }) => {
             theme: "colored",
             transition: Slide,
         });
-        await axios.put(`${URI}/notes/${note._id}`, {
+        const response = await axios.put(`${URI}/notes/${note._id}`, {
             title,
             description
         })
+        setNotes((prevNotes) => prevNotes.map(note => note._id === response.data.updatedNote._id ? response.data.updatedNote : note))
         setEditModalOpen(false)
     }
     return (
