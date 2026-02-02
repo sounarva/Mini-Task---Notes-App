@@ -11,7 +11,7 @@ export function NotesContextProvider({ children }) {
     useEffect(() => {
         const fetchNotes = async () => {
             try {
-                let response = await axios.get(`${URI}/notes`)
+                let response = await axios.get(`/notes`)
                 setNotes(response.data.notes || [])
             } catch (error) {
                 console.log(error.message)

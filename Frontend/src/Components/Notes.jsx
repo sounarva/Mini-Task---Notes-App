@@ -8,7 +8,6 @@ const Notes = () => {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [note, setNote] = useState({})
     const { notes, setNotes } = useContext(NotesContext)
-    const URI = import.meta.env.VITE_BACKEND_URL
 
 
     function editNote(note) {
@@ -28,7 +27,7 @@ const Notes = () => {
             theme: "colored",
             transition: Slide,
         });
-        await axios.delete(`${URI}/notes/${id}`)
+        await axios.delete(`/notes/${id}`)
         setNotes(prevNotes => prevNotes.filter(note => note._id !== id))
     }
 

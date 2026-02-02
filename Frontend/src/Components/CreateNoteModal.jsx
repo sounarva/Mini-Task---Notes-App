@@ -8,10 +8,9 @@ const CreateNoteModal = ({ setModalOpen }) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const { setNotes } = useContext(NotesContext)
-    const URI = import.meta.env.VITE_BACKEND_URL
 
     async function createNote() {
-        const response = await axios.post(`${URI}/notes`, {
+        const response = await axios.post(`/notes`, {
             title,
             description
         })

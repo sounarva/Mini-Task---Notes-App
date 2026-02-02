@@ -6,7 +6,6 @@ import { NotesContext } from '../Context/NotesContext'
 const EditNoteModal = ({ setEditModalOpen, note }) => {
     const [title, setTitle] = useState(note.title)
     const [description, setDescription] = useState(note.description)
-    const URI = import.meta.env.VITE_BACKEND_URL
     const { setNotes } = useContext(NotesContext)
     async function updateNote() {
         toast.info('Note Updated Successfully', {
@@ -20,7 +19,7 @@ const EditNoteModal = ({ setEditModalOpen, note }) => {
             theme: "colored",
             transition: Slide,
         });
-        const response = await axios.put(`${URI}/notes/${note._id}`, {
+        const response = await axios.put(`/notes/${note._id}`, {
             title,
             description
         })
