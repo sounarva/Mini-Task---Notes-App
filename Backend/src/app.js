@@ -2,6 +2,8 @@ const express = require('express')
 require('dotenv').config()
 const app = express()
 const cors = require('cors')
+const path = require('path')
+app.use(express.static('./public'))
 
 app.use(cors())
 app.use(express.json())
@@ -11,5 +13,9 @@ app.post('/notes', createNote) // Creating New Note
 app.get('/notes', getAllNotes) // Fetching All Notes
 app.delete('/notes/:id', deleteNote) // Deleting a Note
 app.put('/notes/:id', updateNote) // Updating a Note
+
+app.use("*name" , (req , res)=>{
+    res.sendFile(path.join(__dirname , "../public/index.html"))
+})
 
 module.exports = app
